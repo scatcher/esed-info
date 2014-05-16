@@ -29,7 +29,7 @@ navigator.sayswho = (function(){
 angular.module('esedInfo', [ 'ngSanitize', 'firebase', 'ui.bootstrap', 'textAngular'])
     .controller('chatController', function ($scope, $timeout, $firebase, $sce) {
 
-        var appVersion = '0.1.1';
+        var appVersion = '0.1.2';
 
         $scope.state = {
             message: '',
