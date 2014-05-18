@@ -1,0 +1,63 @@
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="navbarCtrl">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><i class="fa fa-home"></i> ESED</a>
+        </div>
+
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="nav-collapse">
+            <!--<ul class="nav navbar-nav">-->
+                <!--<li class="active"><a href="#">Link</a></li>-->
+                <!--<li><a href="#">Link</a></li>-->
+                <!--<li class="dropdown">-->
+                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>-->
+                    <!--<ul class="dropdown-menu">-->
+                        <!--<li><a href="#">Action</a></li>-->
+                        <!--<li><a href="#">Another action</a></li>-->
+                        <!--<li><a href="#">Something else here</a></li>-->
+                        <!--<li class="divider"></li>-->
+                        <!--<li><a href="#">Separated link</a></li>-->
+                        <!--<li class="divider"></li>-->
+                        <!--<li><a href="#">One more separated link</a></li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+            <!--</ul>-->
+            <form class="navbar-form navbar-right" ng-if="state.loginMode">
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" required>
+                </div>
+                <button class="btn btn-primary" ng-click="login()">Submit</button>
+                <button class="btn btn-danger" ng-click="cancelLogin()">Cancel</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right" ng-if="!state.loginMode">
+                <li>
+                    <a tooltip-placement="bottom" tooltip="Send suggestions or questions." class="btn btn-link"
+                       href="mailto:esedinfo@scotthatcher.com"
+                       target="_top"><i class="fa fa-envelope"></i> Questions/Suggestions</a>
+                </li>
+                <li>
+                    <a href ng-click="state.loginMode = true"><i class="fa fa-user"></i>
+                    <span class="visible-xs">Login</span></a>
+                </li>
+                <li tooltip-placement="bottom" tooltip="The number of ESED'ers currently on the site.">
+                    <a>
+                        <span data-shake-counter data-count="state.userCount"></span>
+                        <span class="visible-xs">Users Online</span>
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div>
+</div>

@@ -6,13 +6,15 @@
     "angular-point": "git://github.com/scatcher/angular-point.git#master",
     "one-app-theme": "https://github.com/scatcher/one-app-theme.git#master",
     "ng-Fx": "~0.4.0",
-    "textAngular": "latest"
+    "textAngular": "latest",
+    "firebase-simple-login": "~1.4.1"
   },
   "devDependencies": {
     "angular-mocks": "latest",
     "angular-scenario": "latest"
   },
   "resolutions": {
-    "jquery": "~1.11"
+    "jquery": "~1.11",
+    "firebase-simple-login": "~1.4.1"
   }
 }

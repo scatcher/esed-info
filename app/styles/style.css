@@ -1,0 +1,34 @@
+.ta-editor {
+    min-height: 300px;
+    height: auto;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+    margin:20px 0;
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.chat {
+    overflow: auto;
+    -ms-overflow-x: hidden;
+    overflow-x: hidden;
+    height: 290px;
+    position: relative;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-top: 0;
+    overflow-y: scroll;
+}
+
+.jumbotron {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}

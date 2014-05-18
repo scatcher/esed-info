@@ -15,281 +15,27 @@
     <meta name="viewport" content="width=device-width">
 
     <!-- build:css styles/css/vendor.css -->
-
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css">
+    <!-- endbuild -->
 
+    <!-- build:css styles/css/style.css -->
+    <link rel="stylesheet" href="styles/style.css">
     <!-- endbuild -->
 
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
-
-    <style>
-        body {
-            padding-top: 50px;
-            padding-bottom: 20px;
-        }
-
-        .pointer {
-            cursor: pointer;
-        }
-
-        .chat {
-            overflow: auto;
-            -ms-overflow-x: hidden;
-            overflow-x: hidden;
-            height: 290px;
-            position: relative;
-            margin-bottom: 5px;
-            border: 1px solid #ccc;
-            border-top: 0;
-            overflow-y: scroll;
-        }
-
-        .jumbotron {
-            padding-top: 4px;
-            padding-bottom: 4px;
-        }
-    </style>
 
     <!--[if lt IE 9]>
     <script src="bower_components/angular-point/dist/ie-safe.min.js"></script>
     <![endif]-->
 
 </head>
-<body ng-app="esedInfo" ng-controller="chatController">
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#"><i class="fa fa-home"></i> ESED Emergency Bulletin Board</a>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a tooltip-placement="bottom" tooltip="Send suggestions or questions." class="btn btn-link"
-                   href="mailto:esedinfo@scotthatcher.com"
-                   target="_top"><i class="fa fa-envelope"></i> <span class="hidden-xs">Questions/Suggestions</span></a>
-            </li>
-            <li>
-                <a tooltip-placement="bottom" tooltip="The number of ESED'ers currently on the site.">
-                    <span data-shake-counter data-count="state.userCount"></span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
+<body ng-app="esedInfo">
 
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron jumbotron-sm">
-    <div class="container">
-        <h1><i class="fa fa-fire" style="color: red"></i> ESED Emergency Status</h1>
-
-        <p>This site was <abbr class="pointer" data-toggle="tooltip" title
-                               tooltip="This is an understatement :)">hastily</abbr>
-            created to allow for easier dissemination of information regarding the recent evacuation.
-            Stay tuned for updates.</p>
-    </div>
-</div>
-<div class="container">
-<div class="row">
-    <div class="col-xs-7">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-list-ul"></i> Status Updates</h3>
-            </div>
-            <!--<div class="panel-body">-->
-            <div class="list-group" ng-if="posts">
-                <!--<div class="list-group-item">-->
-                <!--<h5 class="list-group-item-heading">Thur May 15th 3:56 PM</h5>-->
-
-                <!--<p>It has officially been confirmed that <strong>the base will remain-->
-                <!--closed tomorrow (5/16)</strong> due to the multiple active fires in the area. Please do not-->
-                <!--attempt to come aboard-->
-                <!--the installation.</p>-->
-
-                <!--<p>We would like to reiterate that we are here if you need anything. Call someone in the-->
-                <!--contacts,-->
-                <!--send an email, or just use the discussion panel and we'll do everything we can to-->
-                <!--assist.</p>-->
-
-                <!--<p>This site will remain updated until the current crisis is over so please continue to check-->
-                <!--back-->
-                <!--for further direction.</p>-->
-                <!--</div>-->
-                <div class="list-group-item" ng-repeat="post in posts | orderByPriority | orderBy:'-order'"
-                     ng-if="post.publish">
-                    <h5 class="list-group-item-heading">{{post.date}}
-                            <span ng-show="$first"
-                                  class="label label-success label-sm">new</span></h5>
-
-                    <div data-ng-bind-html="trustHTML(post.content)"></div>
-                </div>
-                <!--<div class="list-group-item">-->
-                <!--<h5 class="list-group-item-heading">Thur May 15th 11:30 AM <span-->
-                <!--class="label label-success label-sm">new</span></h5>-->
-
-                <!--<p class="list-group-item-text">Nothing new to report but we are still getting a lot of people-->
-                <!--wanting-->
-                <!--to know how others are doing. With that in mind, you'll notice a new real-time "Discussion"-->
-                <!--panel on the page.-->
-                <!--The thread will update in real time so no need to refresh.</p><br/>-->
-
-                <!--<p>Feel free to communicate with each other but please remember that this is on the open-->
-                <!--internet so please-->
-                <!--don't include any sensitive info.</p>-->
-                <!--</div>-->
-                <!--<div href="" class="list-group-item">-->
-                <!--<h5 class="list-group-item-heading">Thur May 15th 7:50 AM</h5>-->
-
-                <!--<p class="list-group-item-text">We've received several generous offers by ESED'ers who want to-->
-                <!--assist anyone displaced or in danger-->
-                <!--by recent events. Please use the email link (top right) to either request or offer-->
-                <!--assistance and-->
-                <!--we'll do our best to coordinate.</p>-->
-                <!--</div>-->
-                <!--<div class="list-group-item">-->
-                <!--<h5 class="list-group-item-heading">Wed May 14th 8:25 PM </h5>-->
-
-                <!--<p class="list-group-item-text">We've added a new question/suggestion capability (top right of-->
-                <!--page) to allow better 2-way communication.-->
-                <!--Please feel free to ask <abbr class="pointer" title-->
-                <!--tooltip="Make sure it's relevant....yes this means you!">anything</abbr>-->
-                <!--and topics deemed-->
-                <!--<abbr class="pointer" title-->
-                <!--tooltip="Yes...Scott picks these and the power is going to his head...">worthy</abbr>-->
-                <!--will be added to a FAQ section. </p>-->
-                <!--</div>-->
-                <!--<div class="list-group-item">-->
-                <!--<h5 class="list-group-item-heading">Wed May 14th 4:56 PM </h5>-->
-
-                <!--<p class="list-group-item-text">The base is officially closed today and Thursday (5/15). If you-->
-                <!--need assistance or someone to talk to please feel-->
-                <!--free to reach out to anyone in the contacts section.</p>-->
-                <!--</div>-->
-                <!--<div class="list-group-item">-->
-                <!--<h5 class="list-group-item-heading">Wed May 14th 3:00 PM </h5>-->
-
-                <!--<p class="list-group-item-text">You all probably received the following message from managment-->
-                <!--in a variety of ways based on available contact information:-->
-                <!--<blockquote>-->
-                <!--"ESED Personnel, as of 15:00 this afternoon, over 150 acres of NWS have been charred.-->
-                <!--Some power and utilities have been interrupted. For updates on the status of the NWS base-->
-                <!--closure and further directions, please visit esed-fallbrook.info."-->
-                <!--<footer>ESED Management</footer>-->
-                <!--</blockquote>-->
-
-                <!--We will provide additional information as we learn more.</p>-->
-                <!--</div>-->
-                <!--<div class="list-group-item">-->
-                <!--<h5 class="list-group-item-heading">Wed May 14th 2:29 PM</h5>-->
-
-                <!--<p class="list-group-item-text">Our offices are closed until further notice. Please check back-->
-                <!--on this site often for further updates and direction.</p>-->
-                <!--</div>-->
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-5">
-
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-comments"></i> Discussion</h3>
-            </div>
-            <div class="chat" scroll-glue>
-                <table class="table table-striped small">
-                    <tbody>
-                    <tr ng-repeat="message in messages">
-                        <td>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <strong>{{message.user}}</strong> (<em>{{ message.time | date:'short'}}</em>)
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <p>{{message.message}}</p>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="panel-footer small">
-                <div class="form-group">
-                    <label>Your name:</label>
-                    <input class="form-control input-sm" ng-model="state.userName"
-                           placeholder="Add your name...">
-                </div>
-                <div class="form-group">
-                    <label>Your message:</label>
-                    <textarea class="form-control input-sm" ng-model="state.message"
-                              placeholder="Type your message here..."></textarea>
-                </div>
-                <div class="btn-group">
-                    <button class="btn btn-primary" ng-click="addMessage()">Send</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-phone"></i> Contacts</h3>
-            </div>
-            <div class="panel-body">
-                <ul class="list-unstyled">
-                    <li>
-                        Shawna Barela <a href="tel:+1-760-421-8718">760-421-8718</a>
-                    </li>
-                    <li>
-                        Ryan Olsen <a href="tel:+1-760-560-6509">760-712-2068</a>
-                    </li>
-                    <li>
-                        Jim Ryan <a href="tel:+1-760-560-6509">760-560-6509</a>
-                    </li>
-                    <li>
-                        David Sims <a href="tel:+1-760-685-4983">760-685-4983</a>
-                    </li>
-                    <li>
-                        Mike Verboom <a href="tel:+1-760-691-6816">760-691-6816</a>
-                    </li>
-                    <li>
-                        Matt O'Malley <a href="tel:+1-760-822-9525">760-822-9525</a>
-                    </li>
-                    <li>
-                        Douglas Barela <a href="tel:+1-760-691-6846">760-691-6846</a>
-                    </li>
-                    <li>
-                        Dale Puett <a href="tel:+1-760-822-8831">760-822-8831</a>
-                    </li>
-                    <li>
-                        Mike Stefani <a href="tel:+1-760-691-6847">760-691-6847</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+<div ng-include="'views/navbar_view.html'"></div>
 
 
-        <div class="panel panel-danger">
-            <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-link"></i> External Resources</h3>
-            </div>
-            <div class="panel-body">
-                <ul class="list-unstyled">
-                    <li ng-repeat="(linkName, link) in links">
-                        <a target="_blank" href="{{link}}">{{linkName}}</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-12">
-        <p>Additional information can also be found on the <a target="_blank"
-                                                              href="http://www.mccscp.com/brushfire">Camp Pendleton
-            Fire Page</a>.</p>
-    </div>
-</div>
-</div>
+<div ui-view></div>
 
 
 <!-- CDN Resources -->
@@ -297,31 +43,44 @@
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
 <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>-->
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-
-<!-- build:js scripts/vendor.js -->
-
-<script src="bower_components/firebase-bower/firebase.js"></script>
-<script src="bower_components/angularfire/angularfire.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<script src="bower_components/lodash/dist/lodash.js"></script>
-
-<script src="bower_components/textAngular/textAngular-sanitize.js"></script>
-<script src="bower_components/textAngular/textAngular.min.js"></script>
-
-
-<!-- endbuild -->
-
-<!--Angular Modules-->
-<!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-resource.min.js"></script>-->
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-sanitize.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-animate.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-touch.min.js"></script>
 
+<!-- build:js scripts/vendor.js -->
 
-<!-- build:js scripts/scripts.js?v=0.1.2 -->
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+
+<script src="bower_components/firebase-bower/firebase.js"></script>
+<script src="bower_components/angularfire/angularfire.js"></script>
+<script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/lodash/dist/lodash.js"></script>
+<script src="bower_components/angular-toastr/dist/angular-toastr.js"></script>
+
+<script src="bower_components/textAngular/textAngular-sanitize.min.js"></script>
+<script src="bower_components/textAngular/textAngular.min.js"></script>
+<script src="bower_components/bootstrap/js/collapse.js"></script>
+
+<!-- endbuild -->
+
+
+<!-- build:js scripts/scripts.js?v=0.1.6 -->
 
 <script src="scripts/app.js"></script>
+
+<script src="scripts/services/login_srvc.js"></script>
+
+<script src="scripts/controllers/main_ctrl.js"></script>
+<script src="scripts/controllers/navbar_ctrl.js"></script>
+<script src="scripts/controllers/post_edit_modal.js"></script>
+
+<script src="scripts/directives/shake_counter_dir.js"></script>
+<script src="scripts/directives/scroll_glue_dir.js"></script>
+
+
+<script src="scripts/filters/reverse_fltr.js"></script>
 
 <!-- endbuild -->
 

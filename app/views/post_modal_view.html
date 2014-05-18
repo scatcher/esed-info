@@ -1,13 +1,39 @@
 <div class="modal-header">
-    <h3 class="modal-title">Edit Post</h3>
+    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">
+        <i class="fa fa-times"></i>
+    </button>
+    <h4 class="modal-title">Edit Post</h4>
 </div>
 <div class="modal-body">
-    <div class="form-group">
-        <label for="">Date String</label>
-        <input ng-model="post.date" class="form-control">
+    <div class="row">
+        <div class="col-xs-8">
+            <div class="form-group">
+                <label>Timestamp</label>
+                <input type="datetime-local" ng-model="post.timestamp" class="form-control">
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="form-group" tooltip="Auto populated so no need to change.">
+                <label>Order</label>
+                <input type="number" ng-model="post.order" class="form-control">
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="form-group" tooltip="Only posts that are published are visible.">
+                <label class="control-label">Publish</label><br/>
+                <button class="btn btn-link"
+                        ng-click="post.publish = !post.publish">
+                    <i class="fa fa-2x {{ post.publish ? 'fa-check-square-o' : 'fa-square-o' }}"></i>
+                </button>
+            </div>
+
+        </div>
     </div>
-    <div text-angular ng-model="post.content" style="height: 800px"></div>
-    <pre>{{post.content}}</pre>
+    <div class="row">
+        <div class="col-xs-12">
+            <div text-angular ng-model="post.content"></div>
+        </div>
+    </div>
 
 </div>
 <div class="modal-footer">

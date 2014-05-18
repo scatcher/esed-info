@@ -1,0 +1,172 @@
+<div class="jumbotron jumbotron-sm">
+    <!-- Main jumbotron for site banner -->
+
+    <div class="container">
+        <h1><i class="fa fa-fire" style="color: red"></i> ESED Contingency</h1>
+
+        <p>This is collaboration site used by the ESED team during interruptions of normal business operations.</p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-7">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <h3 class="panel-title"><i class="fa fa-list-ul"></i> Status Updates</h3>
+                        </div>
+                        <div class="col-xs-2 text-right">
+
+                            <a class="btn btn-default btn-xs" ng-if="state.adminMode" href ng-click="openModal()" tooltip="Create&nbsp;a&nbsp;new&nbsp;post">
+                                <i class="fa fa-plus"></i>
+                            </a>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="list-group" ng-if="posts">
+                    <div class="list-group-item" ng-repeat="(postId, post) in posts | orderByPriority | orderBy:'-order' track by postId"
+                         ng-if="post.publish">
+                        <h5 class="list-group-item-heading">{{post.timestamp | date:'EEE, MMMM d, y h:mm a'}}
+                            <span ng-show="$first"
+                                  class="label label-success label-sm">new</span>
+                            <a href="" ng-if="state.adminMode" ng-click="openModal(post)">Edit</a>
+                        </h5>
+                        <div data-ng-bind-html="trustHTML(post.content)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-5">
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-comments"></i> Discussion</h3>
+                </div>
+                <div class="chat" scroll-glue>
+                    <table class="table table-striped small">
+                        <tbody>
+                        <tr ng-repeat="(messageId, message) in messages track by messageId">
+                            <td>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <strong>{{message.user}}</strong> (<em>{{ message.time | date:'short'}}</em>)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <p>{{message.message}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer small">
+                    <div class="form-group">
+                        <label>Your name:</label>
+                        <input class="form-control input-sm" ng-model="state.userName"
+                               placeholder="Add your name...">
+                    </div>
+                    <div class="form-group">
+                        <label>Your message:</label>
+                        <textarea class="form-control input-sm" ng-model="state.message"
+                                  placeholder="Type your message here..."></textarea>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-primary" ng-click="addMessage()">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-picture-o"></i> Photos
+                        <div class="pull-right"><a href class="small" ng-click="state.showPicDetails = !state.showPicDetails">Details</a> </div>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <a class="strong" target="_blank" href="https://www.icloud.com/photostream/#A3GY8gBYGblicA"><i
+                            class="fa fa-fire"></i> Wildfires 2014</a>
+                    <div ng-if="state.showPicDetails" class="help-block">
+                        <p>Clicking the hyperlink above will open an additional browser window,
+                            where you can browse photos submitted by the ESED Team members.</p>
+
+                        <p>If you are using an Apple IOS device, or have an iCloud account, you can subscribe
+                            to the PhotoStream (and post photos) by emailing
+                            <a href="mailto:Terence.Busmire@icloud.com">terence.busmire@icloud.com</a>.</p>
+
+                        <p>If you are NOT using an Apple IOS device, you may submit photos by emailing them to
+                            <a href="mailto:Terence.Busmire@icloud.com">Terry</a> or using the link available
+                            at the top right of the site.</p>
+
+                        <p>Per guidance from the Detachment OIC, please do NOT submit photos of the Base or its
+                            facilities that you have taken yourself.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-phone"></i> Contacts</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-unstyled">
+                        <li>
+                            Shawna Barela <a href="tel:+1-760-421-8718">760-421-8718</a>
+                        </li>
+                        <li>
+                            Ryan Olsen <a href="tel:+1-760-560-6509">760-712-2068</a>
+                        </li>
+                        <li>
+                            Jim Ryan <a href="tel:+1-760-560-6509">760-560-6509</a>
+                        </li>
+                        <li>
+                            David Sims <a href="tel:+1-760-685-4983">760-685-4983</a>
+                        </li>
+                        <li>
+                            Mike Verboom <a href="tel:+1-760-691-6816">760-691-6816</a>
+                        </li>
+                        <li>
+                            Matt O'Malley <a href="tel:+1-760-822-9525">760-822-9525</a>
+                        </li>
+                        <li>
+                            Douglas Barela <a href="tel:+1-760-691-6846">760-691-6846</a>
+                        </li>
+                        <li>
+                            Dale Puett <a href="tel:+1-760-822-8831">760-822-8831</a>
+                        </li>
+                        <li>
+                            Mike Stefani <a href="tel:+1-760-691-6847">760-691-6847</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-link"></i> External Resources</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-unstyled">
+                        <li ng-repeat="(linkName, link) in links">
+                            <a target="_blank" href="{{link}}">{{linkName}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <p>Additional information can also be found on the <a target="_blank"
+                                                                  href="http://www.mccscp.com/brushfire">Camp Pendleton
+                Fire Page</a>.</p>
+        </div>
+    </div>
+</div>
