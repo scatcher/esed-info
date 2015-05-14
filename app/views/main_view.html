@@ -27,7 +27,7 @@
 
                 </div>
                 <div class="list-group" ng-if="posts">
-                    <div class="list-group-item" ng-repeat="(postId, post) in posts | orderByPriority | orderBy:'-order' track by postId"
+                    <div class="list-group-item" ng-repeat="(postId, post) in posts | orderBy:'-order' track by postId"
                          ng-if="post.publish">
                         <h5 class="list-group-item-heading">{{post.timestamp | date:'EEE, MMMM d, y h:mm a'}}
                             <span ng-show="$first"
@@ -115,32 +115,8 @@
                 </div>
                 <div class="panel-body">
                     <ul class="list-unstyled">
-                        <li>
-                            Shawna Barela <a href="tel:+1-760-421-8718">760-421-8718</a>
-                        </li>
-                        <li>
-                            Ryan Olsen <a href="tel:+1-760-560-6509">760-712-2068</a>
-                        </li>
-                        <li>
-                            Jim Ryan <a href="tel:+1-760-560-6509">760-560-6509</a>
-                        </li>
-                        <li>
-                            David Sims <a href="tel:+1-760-685-4983">760-685-4983</a>
-                        </li>
-                        <li>
-                            Mike Verboom <a href="tel:+1-760-691-6816">760-691-6816</a>
-                        </li>
-                        <li>
-                            Matt O'Malley <a href="tel:+1-760-822-9525">760-822-9525</a>
-                        </li>
-                        <li>
-                            Douglas Barela <a href="tel:+1-760-691-6846">760-691-6846</a>
-                        </li>
-                        <li>
-                            Dale Puett <a href="tel:+1-760-822-8831">760-822-8831</a>
-                        </li>
-                        <li>
-                            Mike Stefani <a href="tel:+1-760-691-6847">760-691-6847</a>
+                        <li ng-repeat="contact in contacts">
+                            {{ contact.name }} <a href="tel:+1-{{ contact.number }}">{{ contact.number }}</a>
                         </li>
                     </ul>
                 </div>

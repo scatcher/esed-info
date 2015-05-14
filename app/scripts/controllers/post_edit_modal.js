@@ -1,5 +1,5 @@
 angular.module('esedInfo')
-    .controller('postEditModal', function ($scope, $modalInstance, $firebase, $sce, posts, post) {
+    .controller('postEditModal', function ($scope, $modalInstance, $sce, posts, post) {
 
         var defaults = {
             date: new Date(),

@@ -1,4 +1,5 @@
-app.controller('navbarCtrl', function ($scope, $timeout, $firebase, $firebaseSimpleLogin, $modal, FIREBASE_URI, appVersion, loginService) {
+//app.controller('navbarCtrl', function ($scope, $timeout, $firebase, $firebaseSimpleLogin, $modal, FIREBASE_URI, appVersion, loginService) {
+app.controller('navbarCtrl', function ($scope, $timeout, $firebaseArray, $modal, FIREBASE_URI, appVersion, loginService) {
 
     $scope.state = {
         loginMode: false,
@@ -43,11 +44,11 @@ app.controller('navbarCtrl', function ($scope, $timeout, $firebase, $firebaseSim
 
     // Allows us to manually refresh browser for all users
     var reloadRef = new Firebase(FIREBASE_URI + 'utility/reloadtrigger');
-    $scope.reloadTrigger = $firebase(reloadRef);
+    $scope.reloadTrigger = $firebaseArray(reloadRef);
 
     var reloadTriggerInitialized = false;
 
-    $scope.reloadTrigger.$on('change', function () {
+    $scope.reloadTrigger.$watch(function () {
         if(!reloadTriggerInitialized) {
             reloadTriggerInitialized = true;
         } else {

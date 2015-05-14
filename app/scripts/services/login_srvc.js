@@ -1,27 +1,30 @@
-app.service('loginService', function ($firebaseSimpleLogin, $firebase, $rootScope, $log, FIREBASE_URI) {
+app.service('loginService', function ($firebaseAuth, $rootScope, $log, FIREBASE_URI) {
     var self = this;
 
-    var auth = $firebaseSimpleLogin(new Firebase(FIREBASE_URI));
+    var auth = $firebaseAuth(new Firebase(FIREBASE_URI));
 
     self.currentUser = null;
 
     self.getCurrentUser = function () {
-        auth.$getCurrentUser()
-            .then(function (user) {
-                self.currentUser = user;
-                console.log(user);
-            });
+        self.currentUser = auth.$getAuth();
+        console.log(self.currentUser);
+        
+        //self.currentUser = 
+        //    .then(function (user) {
+        //        self.currentUser = user;
+        //        console.log(user);
+        //    });
     };
 
     self.getCurrentUser();
     
     self.logout = function () {
-        auth.$logout();
+        auth.$unauth();
         self.currentUser = null;
     };
 
     self.login = function (email, password) {
-        return auth.$login('password', {email: email, password: password})
+        return auth.$authWithPassword('password', {email: email, password: password})
             .then(function (user) {
                 self.currentUser = user;
             });

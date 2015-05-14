@@ -1,4 +1,4 @@
-    app.controller('mainController', function ($scope, $timeout, $firebase, $firebaseSimpleLogin, $sce, $modal, $log, $location, FIREBASE_URI) {
+    app.controller('mainController', function ($scope, $timeout, $firebaseObject, $firebaseArray, $sce, $modal, $log, $location, FIREBASE_URI) {
 
 
         $scope.state = {
@@ -19,7 +19,7 @@
             return items.reverse();
         };
 
-        $scope.$watch('loginstate',function (newval,oldval) {
+        $scope.$watch('loginstate',function (newval, oldval) {
             if(newval){
                 $scope.loginstatus = 'user '+ $scope.data.userInfo.username+' logged in'
             } else {
@@ -28,23 +28,24 @@
         });
 
 
-        var ref = new Firebase(FIREBASE_URI + 'discussion').limit(20);
+        var ref = new Firebase(FIREBASE_URI + 'discussion').limitToLast(30);
 
-        $scope.messages = $firebase(ref);
+        $scope.messages = $firebaseArray(ref);
 
         $scope.addMessage = function () {
             var userName = $scope.state.userName.length > 0 ? $scope.state.userName : 'Anonymous';
-            $scope.messages.$add({user: userName, message: $scope.state.message, time: new Date()});
+            $scope.messages.$add({user: userName, message: $scope.state.message, time: Firebase.ServerValue.TIMESTAMP});
             $scope.state.message = '';
         };
 
         var postRef = new Firebase(FIREBASE_URI + 'posts');
-        $scope.posts = $firebase(postRef);
+        $scope.posts = $firebaseArray(postRef);
 
         var linksRef = new Firebase(FIREBASE_URI + 'links');
-        $scope.links = $firebase(linksRef);
+        $scope.links = $firebaseObject(linksRef);
 
-
+        var contactsRef = new Firebase(FIREBASE_URI + 'contacts');
+        $scope.contacts = $firebaseArray(contactsRef);
 
         $scope.openModal = function (post) {
 
